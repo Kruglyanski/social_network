@@ -1,0 +1,44 @@
+.myPosts {
+    padding:  0 25px 25px  ;
+    grid-area: p;
+    display: grid;
+    height: auto;
+
+}
+.myPosts h3{
+    font-size: 24px;
+
+}
+.newPost {
+    display: grid;
+    width: 60%;
+}
+
+.newPost span {
+
+
+}
+.newPost textarea {
+
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.newPost textarea:focus {
+    outline: none;
+}
+
+.newPost button {
+    width: 20%;
+    height: 70%;
+    background-color: #17ff5d;
+    justify-self: end;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+.newPost button:hover {
+    box-shadow:3px -1px 5px 0px rgba(50, 50, 50, 0.75);
+}

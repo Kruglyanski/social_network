@@ -1,0 +1,42 @@
+.content {
+    grid-area: c;
+    display: grid;
+    background-color: #5c99a8;
+    /*grid-template-rows: 310px 260px 310px;*/
+    /*grid-template-columns: 30% 70%;*/
+    /*grid-gap: 10px;*/
+    grid-template-areas:
+            "hc"
+            "aw"
+            "p";
+
+}
+.contentHeader {
+    grid-area: hc;
+}
+
+.contentHeader img {
+    width: 100%;
+}
+
+.avaWrapper {
+    grid-area: aw;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-areas:
+            "a d";
+    padding: 0 25px ;
+}
+.avatar {
+    grid-area: a;
+}
+
+.description {
+    grid-area: d;
+    width: 210px;
+}
+
+.avatar img {
+    width: 200px;
+}
+

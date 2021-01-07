@@ -1,0 +1,21 @@
+.avatar img {
+    width: 60px;
+    border-radius: 30px;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    font-size: 18px;
+    grid-gap: 10px;
+    padding: 25px 25px 0 25px;
+
+
+}
+
+.likes{
+    font-size: 12px;
+    grid-column: 2 / 3;
+    justify-self: end;
+}
+
