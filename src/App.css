@@ -1,5 +1,6 @@
 body {
     background-color: #294465;
+    height: auto;
 }
 
 a {
@@ -10,14 +11,14 @@ a {
 .app-wrapper {
     width: 1200px;
     margin: 0 auto;
-    height: 100vh;
+    height: auto;
     display: grid;
-    grid-template-rows: 80px 1fr;
+    grid-template-rows: 80px 1fr ;
     grid-template-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
     grid-template-areas:
     "h h"
-    "n c";
+    "s c";
 
 }
 

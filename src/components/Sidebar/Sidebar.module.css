@@ -1,0 +1,18 @@
+.sidebar {
+    grid-area: s;
+    background-color: #7e288e;
+    height: 100%;
+
+}
+
+.friends {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    text-align: center;
+}
+
+.sidebar .avatar img {
+    width: 52px;
+    border-radius: 26px;
+}

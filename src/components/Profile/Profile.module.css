@@ -2,9 +2,6 @@
     grid-area: c;
     display: grid;
     background-color: #5c99a8;
-    /*grid-template-rows: 310px 260px 310px;*/
-    /*grid-template-columns: 30% 70%;*/
-    /*grid-gap: 10px;*/
     grid-template-areas:
             "hc"
             "aw"

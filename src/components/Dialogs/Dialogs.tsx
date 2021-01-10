@@ -12,12 +12,29 @@ export const Dialogs: React.FC<DialogsType>= (props) => {
         <div className={cls.dialogs}>
             <h2>Dialogs</h2>
             <div className={cls.dialogsItems}>
-                {props.dialogsState.dialogs.map(dialog => <DialogsItem key={dialog.id + Math.random()} id={dialog.id} name={dialog.name}/>)}
+                {props.dialogsState.dialogs.map(
+                    dialog => <DialogsItem
+                        key={dialog.id + Math.random()}
+                        id={dialog.id}
+                        name={dialog.name}
+                        avatar={dialog.avatar}/>)
+                }
 
 
             </div>
             <div className={cls.messagesItems}>
-                {props.dialogsState.messages.map(message => <MessagesItem key={message.id + Math.random()} id={message.id} message={message.message}/>)}
+                <div className={cls.newMessage}>
+                    <span>New Message:</span>
+                    <textarea/>
+                    <button> Submit</button>
+                </div>
+                {props.dialogsState.messages.map(
+                    message => <MessagesItem
+                        key={message.id + Math.random()}
+                        id={message.id}
+                        message={message.message}
+                        author={message.author}/>)
+                }
             </div>
 
         </div>

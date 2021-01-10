@@ -1,11 +1,19 @@
 export type MessageType = {
     id: number,
-    message: string
+    message: string,
+    author: string
 }
 
 export type DialogType = {
     id: number,
-    name: string
+    name: string,
+    avatar: string
+}
+
+export type FriendsType = {
+    id: number,
+    name: string,
+    avatar: string
 }
 
 export type PostType = {
@@ -22,10 +30,14 @@ export type DialogPageType = {
     dialogs: Array<DialogType>,
     messages: Array<MessageType>
 }
+export type SidebarType = {
+    friends: Array<FriendsType>
+}
 
 export type StateType = {
     profilePage: ProfilePageType,
-    dialogsPage: DialogPageType
+    dialogsPage: DialogPageType,
+    sidebar: SidebarType
 }
 const state: StateType = {
 
@@ -41,20 +53,78 @@ const state: StateType = {
 
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Roman'},
-            {id: 2, name: 'Denis'},
-            {id: 3, name: 'Andrey'},
-            {id: 4, name: 'Dimych'}
+            {
+                id: 1,
+                name: 'Roman',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 2,
+                name: 'Denis',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 3,
+                name: 'Andrey',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 4,
+                name: 'Denis',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 5,
+                name: 'Andrey',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 6,
+                name: 'Denis',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 7,
+                name: 'Andrey',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 8,
+                name: 'Dimych',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            }
         ],
 
         messages: [
-            {id: 1, message: 'How r u?'},
-            {id: 2, message: 'Hello'},
-            {id: 3, message: 'BLABLA'},
-            {id: 4, message: 'Yo'},
-            {id: 5, message: 'Lorem....'}
+            {id: 1, message: 'How r u?', author: 'Roman'},
+            {id: 2, message: 'Hello', author: 'Denis'},
+            {id: 3, message: 'BLABLA', author: 'Roman'},
+            {id: 4, message: 'Yo', author: 'Denis'},
+            {id: 5, message: 'Lorem....', author: 'Roman'}
         ]
+    },
+    sidebar: {
+        friends: [
+            {
+                id: 1,
+                name: 'Roman',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 2,
+                name: 'Denis',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            },
+            {
+                id: 3,
+                name: 'Andrey',
+                avatar: 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
+            }
+        ]
+
     }
+
+
 }
 
 export default state

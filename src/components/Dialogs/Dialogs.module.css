@@ -1,8 +1,9 @@
 .dialogs {
     display: grid;
-    grid-template-rows: 20% 80%;
+    /*grid-template-rows: 20% 80%;*/
     grid-template-columns: 30% 50%;
-    grid-gap: 25px;
+
+    height: 100%;
 }
 
 .dialogs h2 {
@@ -16,4 +17,40 @@
 
 .messagesItems {
     padding: 0 15px;
+    display: grid;
+    /*grid-template-columns: 50% 50%;*/
+}
+
+.newMessage {
+    display: grid;
+    width: 60%;
+}
+
+.newMessage span {
+
+
+}
+.newMessage textarea {
+
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.newMessage textarea:focus {
+    outline: none;
+}
+
+.newMessage button {
+    width: 20%;
+    height: 70%;
+    background-color: #17ff5d;
+    justify-self: end;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+.newMessage button:hover {
+    box-shadow:3px -1px 5px 0px rgba(50, 50, 50, 0.75);
 }
