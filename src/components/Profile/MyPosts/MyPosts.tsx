@@ -2,28 +2,27 @@ import cls from './MyPosts.module.css'
 import React from 'react'
 import {Post} from './Post/Post'
 import type {NewPostTextType, PostType} from '../../../redux/store'
-import {addPostActionCreator, DispatchType, updateNewPostTextActionCreator} from '../../../redux/store'
 
 
 type MyPostsType = {
     posts: Array<PostType>,
     newPostText: NewPostTextType,
-    dispatch: DispatchType
+    onPostChange: (text: string) => void
+    addPost: () => void
 }
-
 
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let onPostChange = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value
-            props.dispatch(updateNewPostTextActionCreator(text))
-        }
+    // let newPostElement = React.createRef<HTMLTextAreaElement>()
+    let onPostChange = (e:React.ChangeEvent<HTMLTextAreaElement>): any => {
+
+        const text = e.target.value
+        props.onPostChange(text)
+
     }
     let addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
 
     }
     return (
@@ -33,10 +32,12 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
             </h3>
             <div className={cls.newPost}>
                 <span>New post:</span>
-                <textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}/>
+                <textarea  value={props.newPostText} onChange={onPostChange}/>
                 <button onClick={addPost}> Add Post</button>
             </div>
+            {console.log('poo', props.posts)}
             {props.posts.map(post => {
+
                 return <Post
                     key={post.id + Math.random()}
                     id={post.id}

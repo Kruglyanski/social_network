@@ -1,43 +1,44 @@
 import React from 'react'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import cls from './components/Profile/Profile.module.css'
 import './App.css'
 import {Header} from './components/Header/Header'
-import {Dialogs} from './components/Dialogs/Dialogs'
+
 import {Profile} from './components/Profile/Profile'
 import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import type {DispatchType, StateType} from './redux/store'
-import {DialogPage} from './components/Dialogs/DialogPage/DialogPage'
-import {Sidebar} from './components/Sidebar/Sidebar'
+import {DialogsContainer} from './components/Dialogs/DialogsContainer'
+import {SidebarContainer} from './components/Sidebar/SidebarContainer'
 
-type AppType = {
-    state: StateType,
-    dispatch: DispatchType
-}
 
-const App: React.FC<AppType> = (props) => {
+// type AppType = {
+//     state:  Store<CombinedState<{profilePage: never, dialogsPage: never, sidebar: never}>, ActionType>,
+//     dispatch: DispatchType
+// }
+
+const App: React.FC = () => {
 
 
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
 
-                <Sidebar sidebarProps={props.state.sidebar}/>
+        <div className="app-wrapper">
+            <Header/>
 
-                <div className={cls.content}>
-                    <Route path="/profile" render={() => <Profile profileState={props.state.profilePage} dispatch={props.dispatch} />}/>
-                    <Route exact path="/dialogs" render={() => <Dialogs dialogsState={props.state.dialogsPage} newMessageBody={props.state.dialogsPage.newMessageBody} dispatch={props.dispatch}/>}/>
-                    <Route path="/dialogs/:id" render={() => <DialogPage/>}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    {/*state={props.state}*/}
-                </div>
+            <SidebarContainer/>
+
+            <div className={cls.content}>
+                <Route path="/profile" render={() => <Profile/>}/>
+                {/*{console.log('render')}*/}
+                <Route exact path="/dialogs" render={() => <DialogsContainer/>}/>
+                {/*<Route path="/dialogs/:id" render={() => <DialogPage/>}/>*/}
+                <Route path="/news" render={() => <News/>}/>
+                <Route path="/music" render={() => <Music/>}/>
+                <Route path="/settings" render={() => <Settings/>}/>
+
             </div>
-        </BrowserRouter>
+        </div>
+
     )
 }
 

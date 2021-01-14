@@ -2,30 +2,29 @@ import React from 'react'
 import {DialogsItem} from './DialogsItem/DialogsItem'
 import cls from './Dialogs.module.css'
 import {MessagesItem} from './MessagesItem/MessagesItem'
-import type {DialogPageType, DispatchType, NewMessageBodyType} from '../../redux/store'
-import {
-    addMessageActionCreator,
-    updateNewMessageBodyActionCreator,
-} from '../../redux/store'
+import type { DialogType, MessageType, NewMessageBodyType} from '../../redux/store'
+
 
 type DialogsType = {
-    dialogsState: DialogPageType,
-    dispatch: DispatchType,
-    newMessageBody: NewMessageBodyType
+    messages: Array<MessageType>,
+    dialogs: Array<DialogType>
+    newMessageBody: NewMessageBodyType,
+    onMessageChange: (text: string) => void,
+    addMessage: () => void
 }
 export const Dialogs: React.FC<DialogsType>= (props) => {
     let onMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void  => {
-            props.dispatch(updateNewMessageBodyActionCreator(e.target.value))
+            props.onMessageChange(e.target.value)
     }
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator())
+        props.addMessage()
 
     }
     return (
         <div className={cls.dialogs}>
             <h2>Dialogs</h2>
             <div className={cls.dialogsItems}>
-                {props.dialogsState.dialogs.map(
+                {props.dialogs.map(
                     dialog => <DialogsItem
                         key={dialog.id + Math.random()}
                         id={dialog.id}
@@ -41,7 +40,7 @@ export const Dialogs: React.FC<DialogsType>= (props) => {
                     <textarea  value={props.newMessageBody} onChange={onMessageChange}/>
                     <button onClick={addMessage}> Submit</button>
                 </div>
-                {props.dialogsState.messages.map(
+                {props.messages.map(
                     message => <MessagesItem
                         key={message.id + Math.random()}
                         id={message.id}

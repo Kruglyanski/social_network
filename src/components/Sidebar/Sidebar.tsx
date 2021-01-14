@@ -1,10 +1,10 @@
 import React from 'react'
 import cls from './Sidebar.module.css'
 import {Navbar} from '../Navbar/Navbar'
-import type {SidebarType} from '../../redux/store'
+import type {FriendType} from '../../redux/store'
 
 type FriendsType = {
-    sidebarProps: SidebarType
+    friends: Array<FriendType>
 }
 
 
@@ -14,7 +14,7 @@ export const Sidebar: React.FC<FriendsType> = (props) => {
             <Navbar/>
             <h3>Friends</h3>
             <div className={cls.friends}>
-                {props.sidebarProps.friends.map(friend => {
+                {props.friends.map(friend => {
                     return (
                         <div key={friend.id + Math.random()}>
                             <div className={cls.avatar}>
