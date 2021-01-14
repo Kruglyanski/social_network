@@ -1,11 +1,13 @@
 import React from 'react'
 import cls from './Profile.module.css'
 import {MyPosts} from './MyPosts/MyPosts'
-import type {ProfilePageType} from '../../redux/state'
+import type {ProfilePageType} from '../../redux/store'
+import {DispatchType} from '../../redux/store'
 
 
 type ProfileType = {
-    profileState: ProfilePageType
+    profileState: ProfilePageType,
+    dispatch: DispatchType
 }
 
 export const Profile: React.FC<ProfileType> = (props) => {
@@ -23,7 +25,7 @@ export const Profile: React.FC<ProfileType> = (props) => {
                     Description Description
                 </div>
             </div>
-            <MyPosts posts ={props.profileState.posts}/>
+            <MyPosts posts={props.profileState.posts} dispatch={props.dispatch} newPostText={props.profileState.newPostText} />
 
         </div>
     )

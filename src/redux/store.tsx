@@ -1,45 +1,10 @@
-export type MessageType = {
-    id: number,
-    message: string,
-    author: string
-}
+import {ADD_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_BODY, UPDATE_NEW_POST_TEXT} from './actionsTypes'
+import {profileReducer} from './profileReducer'
+import {dialogsReducer} from './dialogsReducer'
+//import sidebarReducer} from './sidebarReducer'
 
-export type DialogType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-
-export type FriendsType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-
-export type PostType = {
-    id: number,
-    message: string,
-    likesCount: number
-}
-
-export type ProfilePageType = {
-    posts: Array<PostType>
-}
-
-export type DialogPageType = {
-    dialogs: Array<DialogType>,
-    messages: Array<MessageType>
-}
-export type SidebarType = {
-    friends: Array<FriendsType>
-}
-
-export type StateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogPageType,
-    sidebar: SidebarType
-}
-const state: StateType = {
+let store = {
+    _state: {
 
     profilePage: {
         posts: [
@@ -48,7 +13,8 @@ const state: StateType = {
             {id: 3, message: 'Third', likesCount: 34},
             {id: 4, message: 'Fourth', likesCount: 3},
             {id: 5, message: 'Fifth', likesCount: 555}
-        ]
+        ],
+        newPostText: 'Enter text'
     },
 
     dialogsPage: {
@@ -101,7 +67,8 @@ const state: StateType = {
             {id: 3, message: 'BLABLA', author: 'Roman'},
             {id: 4, message: 'Yo', author: 'Denis'},
             {id: 5, message: 'Lorem....', author: 'Roman'}
-        ]
+        ],
+        newMessageBody: '',
     },
     sidebar: {
         friends: [
@@ -125,6 +92,108 @@ const state: StateType = {
     }
 
 
+},
+    getState(){
+        return this._state
+    },
+    _callSubscriber(state: StateType){
+    },
+
+     subscribe(observer: (state: StateType) => void){
+         this._callSubscriber = observer
+    },
+
+    dispatch(action: ActionType){
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        //this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._callSubscriber(this._state)
+    }
+}
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST,
+        payload: ''
+    }
+}
+export const updateNewPostTextActionCreator = (text: NewPostTextType) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        payload: text
+    }
+
+}
+export const addMessageActionCreator = () => {
+    return {
+        type: ADD_MESSAGE,
+        payload: ''
+    }
+}
+export const updateNewMessageBodyActionCreator = (text: NewPostTextType) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        payload: text
+    }
+
 }
 
-export default state
+
+export type MessageType = {
+    id: number,
+    message: string,
+    author: string
+}
+
+export type DialogType = {
+    id: number,
+    name: string,
+    avatar: string
+}
+
+export type FriendsType = {
+    id: number,
+    name: string,
+    avatar: string
+}
+
+export type PostType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+export type NewPostTextType = string
+export type NewMessageBodyType = string
+
+export type AddPostType = () =>  void
+
+export type UpdateNewPostTextType = (postMessage: string) =>  void
+
+export type ActionType = {
+    type: string,
+    payload: NewPostTextType
+}
+export type DispatchType = (action: ActionType) => void
+
+export type ProfilePageType = {
+    posts: Array<PostType>,
+    newPostText: NewPostTextType
+}
+
+export type DialogPageType = {
+    dialogs: Array<DialogType>,
+    messages: Array<MessageType>,
+    newMessageBody: NewMessageBodyType
+}
+export type SidebarType = {
+    friends: Array<FriendsType>
+}
+
+export type StateType = {
+    profilePage: ProfilePageType,
+    dialogsPage: DialogPageType,
+    sidebar: SidebarType
+}
+
+export default store
+

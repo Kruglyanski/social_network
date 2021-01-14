@@ -1,6 +1,6 @@
 import React from 'react'
 import cls from './MessagesItem.module.css'
-import type {MessageType} from '../../../redux/state'
+import type {MessageType} from '../../../redux/store'
 
 export const MessagesItem: React.FC<MessageType> = (props) => {
     const classes = [
