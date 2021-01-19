@@ -1,0 +1,36 @@
+.users{
+    padding-left: 15px;
+}
+.avatar img {
+    width: 100px;
+}
+
+.userItem {
+    display: grid;
+    width: 600px;
+    border: #294465 solid 2px;
+    border-radius: 15px;
+    grid-template-columns: 1fr 4fr;
+    padding:15px;
+    margin-bottom: 15px;
+}
+
+.description{
+justify-self: end;
+    text-align: end;
+}
+
+.button{
+
+}
+
+.pagination {
+    height: 50px;
+}
+.pagination span {
+    cursor: pointer;
+}
+.current {
+    font-weight: bold;
+
+}

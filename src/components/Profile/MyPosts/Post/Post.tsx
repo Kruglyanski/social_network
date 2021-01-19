@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from './Post.module.css'
-import {PostType} from '../../../../redux/store'
+import {PostType} from '../../../../types'
+
 
 
 

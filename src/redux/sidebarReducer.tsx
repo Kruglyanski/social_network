@@ -1,4 +1,5 @@
-import {ActionType, SidebarType} from './store'
+import { SidebarType} from '../types'
+import {ActionType} from './actions'
 
 
 type SidebarReducerType = (state: SidebarType, action: ActionType) => SidebarType

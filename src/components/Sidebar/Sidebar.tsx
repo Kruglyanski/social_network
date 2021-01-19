@@ -1,7 +1,8 @@
 import React from 'react'
 import cls from './Sidebar.module.css'
 import {Navbar} from '../Navbar/Navbar'
-import type {FriendType} from '../../redux/store'
+import {FriendType} from '../../types'
+
 
 type FriendsType = {
     friends: Array<FriendType>

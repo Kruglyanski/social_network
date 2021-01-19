@@ -2,7 +2,8 @@ import React from 'react'
 import {DialogsItem} from './DialogsItem/DialogsItem'
 import cls from './Dialogs.module.css'
 import {MessagesItem} from './MessagesItem/MessagesItem'
-import type { DialogType, MessageType, NewMessageBodyType} from '../../redux/store'
+import {DialogType, MessageType, NewMessageBodyType} from '../../types'
+
 
 
 type DialogsType = {

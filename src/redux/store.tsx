@@ -111,89 +111,9 @@ import {ADD_MESSAGE, ADD_POST, UPDATE_NEW_MESSAGE_BODY, UPDATE_NEW_POST_TEXT} fr
 //         this._callSubscriber(this._state)
 //     }
 // }
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST,
-        payload: ''
-    }
-}
-export const updateNewPostTextActionCreator = (text: NewPostTextType) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        payload: text
-    }
-
-}
-export const addMessageActionCreator = () => {
-    return {
-        type: ADD_MESSAGE,
-        payload: ''
-    }
-}
-export const updateNewMessageBodyActionCreator = (text: NewPostTextType) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        payload: text
-    }
-
-}
 
 
-export type MessageType = {
-    id: number,
-    message: string,
-    author: string
-}
 
-export type DialogType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-
-export type FriendType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-
-export type PostType = {
-    id: number,
-    message: string,
-    likesCount: number
-}
-export type NewPostTextType = string
-export type NewMessageBodyType = string
-
-export type AddPostType = () =>  void
-
-export type UpdateNewPostTextType = (postMessage: string) =>  void
-
-export type ActionType = {
-    type: string,
-    payload: NewPostTextType
-}
-export type DispatchType = (action: ActionType) => ActionType
-
-export type ProfilePageType = {
-    posts: Array<PostType>,
-    newPostText: NewPostTextType
-}
-
-export type DialogsPageType = {
-    dialogs: Array<DialogType>,
-    messages: Array<MessageType>,
-    newMessageBody: NewMessageBodyType
-}
-export type SidebarType = {
-    friends: Array<FriendType>
-}
-
-export type StateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType,
-    sidebar: SidebarType
-}
 
 // export default store
 

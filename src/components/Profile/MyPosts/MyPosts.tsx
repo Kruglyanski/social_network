@@ -1,7 +1,7 @@
 import cls from './MyPosts.module.css'
 import React from 'react'
 import {Post} from './Post/Post'
-import type {NewPostTextType, PostType} from '../../../redux/store'
+import {NewPostTextType, PostType} from '../../../types'
 
 
 type MyPostsType = {
@@ -14,7 +14,7 @@ type MyPostsType = {
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
 
-    // let newPostElement = React.createRef<HTMLTextAreaElement>()
+
     let onPostChange = (e:React.ChangeEvent<HTMLTextAreaElement>): any => {
 
         const text = e.target.value
@@ -35,7 +35,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
                 <textarea  value={props.newPostText} onChange={onPostChange}/>
                 <button onClick={addPost}> Add Post</button>
             </div>
-            {console.log('poo', props.posts)}
+
             {props.posts.map(post => {
 
                 return <Post

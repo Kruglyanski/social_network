@@ -1,17 +1,7 @@
-
-import { DispatchType, NewMessageBodyType, StateType} from '../../redux/store'
-import {
-    addMessageActionCreator,
-    updateNewMessageBodyActionCreator
-} from '../../redux/store'
 import {connect} from 'react-redux'
 import {Dialogs} from './Dialogs'
-
-// type DialogsType = {
-//     dialogsState: DialogsPageType,
-//     dispatch: DispatchType,
-//     newMessageBody: NewMessageBodyType
-// }
+import {DispatchType, NewMessageBodyType, StateType} from '../../types'
+import {addMessageActionCreator, updateNewMessageBodyActionCreator} from '../../redux/actions'
 
 
 const mapStateToProps = (state: StateType) => {

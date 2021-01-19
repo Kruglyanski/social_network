@@ -1,7 +1,9 @@
-import { ADD_POST, UPDATE_NEW_POST_TEXT} from './actionsTypes'
-import {ActionType, PostType, ProfilePageType} from './store'
+import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from './actionsTypes'
+import {PostType, ProfilePageType} from '../types'
+import {ActionType} from './actions'
 
-type ProfileReducerType = (state: ProfilePageType, action: ActionType) => ProfilePageType
+
+type ProfileReducerType = (state: ProfilePageType, action: any) => ProfilePageType
 
 const initialState = {
     posts: [
@@ -11,7 +13,8 @@ const initialState = {
         {id: 4, message: 'Fourth', likesCount: 3},
         {id: 5, message: 'Fifth', likesCount: 555}
     ],
-    newPostText: 'Enter text'
+    newPostText: 'Enter text',
+    profile: null
 }
 
 export const profileReducer: ProfileReducerType = (state= initialState, action) => {
@@ -26,6 +29,8 @@ export const profileReducer: ProfileReducerType = (state= initialState, action) 
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.payload}
+            case SET_USER_PROFILE:
+            return {...state, profile: action.payload}
         default:
             return state
     }

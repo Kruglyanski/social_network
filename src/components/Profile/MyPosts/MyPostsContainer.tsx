@@ -1,13 +1,7 @@
-
-import {
-    addPostActionCreator,
-    DispatchType,
-    NewPostTextType,
-    StateType,
-    updateNewPostTextActionCreator
-} from '../../../redux/store'
 import {connect} from 'react-redux'
 import {MyPosts} from './MyPosts'
+import {DispatchType, NewPostTextType, StateType} from '../../../types'
+import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/actions'
 
 
 // type MyPostsType = {

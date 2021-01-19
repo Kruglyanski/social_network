@@ -1,7 +1,8 @@
 import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from './actionsTypes'
-import {ActionType, DialogsPageType} from './store'
+import { DialogsPageType} from '../types'
 
-type DialogsReducerType = (state: DialogsPageType, action: ActionType) => DialogsPageType
+
+type DialogsReducerType = (state: DialogsPageType, action: any) => DialogsPageType
 
 const initialState = {
     dialogs: [
