@@ -7,7 +7,16 @@ a {
     text-decoration: none;
 }
 
+.content {
+    grid-area: c;
+    display: grid;
+    background-color: #5c99a8;
+    grid-template-areas:
+            "hc"
+            "aw"
+            "p";
 
+}
 .app-wrapper {
     width: 1200px;
     margin: 0 auto;

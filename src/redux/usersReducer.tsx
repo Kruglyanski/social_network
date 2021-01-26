@@ -1,4 +1,5 @@
 import {
+    FOLLOWING_IN_PROGRESS,
     USER_FOLLOW,
     USER_ISFETCHING_TOGGLE,
     USER_SET_CURRENT_PAGE,
@@ -13,7 +14,8 @@ const initialState = {
     currentPage: 1,
     pageSize: 5,
     pagesCount: 20,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: [] as Array<number>
 }
 
 export type InitialStateType = typeof initialState
@@ -46,8 +48,17 @@ export const usersReducer = (state = initialState, action: any): InitialStateTyp
             return {...state, pagesCount: action.payload}
         case USER_SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload}
-            case USER_ISFETCHING_TOGGLE:
+        case USER_ISFETCHING_TOGGLE:
             return {...state, isFetching: action.payload}
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.payload.isFollow
+                    ?
+                    [...state.followingInProgress, action.payload.userId]
+                    :
+                    state.followingInProgress.filter(id => id !== action.payload.userId)
+            }
 
         default:
             return state

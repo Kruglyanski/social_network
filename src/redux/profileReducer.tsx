@@ -1,4 +1,4 @@
-import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from './actionsTypes'
+import {ADD_POST, SET_USER_PROFILE, SET_USER_STATUS, UPDATE_NEW_POST_TEXT} from './actionsTypes'
 import {PostType, ProfilePageType} from '../types'
 import {ActionType} from './actions'
 
@@ -14,10 +14,11 @@ const initialState = {
         {id: 5, message: 'Fifth', likesCount: 555}
     ],
     newPostText: 'Enter text',
-    profile: null
+    profile: null,
+    status: 'ReduxStatus'
 }
 
-export const profileReducer: ProfileReducerType = (state= initialState, action) => {
+export const profileReducer: ProfileReducerType = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
 
@@ -29,10 +30,13 @@ export const profileReducer: ProfileReducerType = (state= initialState, action) 
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.payload}
-            case SET_USER_PROFILE:
+        case SET_USER_PROFILE:
             return {...state, profile: action.payload}
+            case SET_USER_STATUS:
+            return {...state, status: action.payload}
         default:
             return state
     }
 
 }
+

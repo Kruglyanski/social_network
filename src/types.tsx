@@ -1,3 +1,5 @@
+import {AuthType} from './redux/authReducer'
+
 export type MessageType = {
     id: number,
     message: string,
@@ -51,8 +53,14 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: NewPostTextType
     profile: UserProfileType | null
+    status: string
 }
-
+export type AuthDataType = {
+    password:  string | null
+    email: string | null
+    id: number | null
+    isAuth: boolean
+}
 export type UserProfileType ={
     aboutMe: null | string,
     contacts: {
@@ -82,6 +90,7 @@ export type UserPageType = {
     pageSize: number
     pagesCount: number
     isFetching: boolean
+    followingInProgress: []
 
 }
 
@@ -98,5 +107,6 @@ export type StateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
     sidebar: SidebarType,
-    usersPage: UserPageType
+    usersPage: UserPageType,
+    auth: AuthType
 }

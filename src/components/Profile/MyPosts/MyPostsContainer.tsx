@@ -4,11 +4,6 @@ import {DispatchType, NewPostTextType, StateType} from '../../../types'
 import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/actions'
 
 
-// type MyPostsType = {
-//     posts: Array<PostType>,
-//     newPostText: NewPostTextType,
-//     dispatch: DispatchType
-// }
 
 
 const mapStateToProps = (state: StateType) => {

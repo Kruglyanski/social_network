@@ -5,13 +5,13 @@ import {MessagesItem} from './MessagesItem/MessagesItem'
 import {DialogType, MessageType, NewMessageBodyType} from '../../types'
 
 
-
 type DialogsType = {
     messages: Array<MessageType>,
     dialogs: Array<DialogType>
     newMessageBody: NewMessageBodyType,
     onMessageChange: (text: string) => void,
     addMessage: () => void
+isAuth: boolean
 }
 export const Dialogs: React.FC<DialogsType>= (props) => {
     let onMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void  => {
@@ -21,7 +21,9 @@ export const Dialogs: React.FC<DialogsType>= (props) => {
         props.addMessage()
 
     }
+
     return (
+
         <div className={cls.dialogs}>
             <h2>Dialogs</h2>
             <div className={cls.dialogsItems}>
@@ -51,5 +53,6 @@ export const Dialogs: React.FC<DialogsType>= (props) => {
             </div>
 
         </div>
+
     )
 }

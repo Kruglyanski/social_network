@@ -1,12 +1,14 @@
 import {
     ADD_MESSAGE,
-    ADD_POST, SET_USER_PROFILE,
+    ADD_POST, AUTH_ISFETCHING, FOLLOWING_IN_PROGRESS, SET_USER_DATA, SET_USER_PROFILE, SET_USER_STATUS,
     UPDATE_NEW_MESSAGE_BODY,
     UPDATE_NEW_POST_TEXT,
     USER_FOLLOW, USER_ISFETCHING_TOGGLE, USER_SET_CURRENT_PAGE, USER_SET_PAGES_COUNT, USER_SET_USERS,
     USER_UNFOLLOW
 } from './actionsTypes'
-import {NewPostTextType, UserIdType, UserPageType, UserProfileType, UserType} from '../types'
+import {AuthDataType, NewPostTextType, UserIdType, UserPageType, UserProfileType, UserType} from '../types'
+import {authApi, profileApi, usersApi} from '../api/api'
+import axios from 'axios'
 
 export type ActionType = UpdateNewPostTextActionCreatorActionType | AddPostActionCreatorActionType |
     AddMessageActionCreatorActionType | UpdateNewMessageBodyActionCreatorActionType | FollowActionActionType |
@@ -140,3 +142,156 @@ export const setUserProfile = (profile: UserProfileType): setUserProfileType => 
         payload: profile
     }
 }
+
+export type setUserDataType = {
+    type: typeof SET_USER_DATA
+    payload: AuthDataType
+}
+
+export const setUserData = ({ email, password, id, isAuth}: AuthDataType): setUserDataType => {
+    return {
+        type: SET_USER_DATA,
+        payload: { email, password, id, isAuth}
+    }
+}
+
+export type AuthIsFetchingType = {
+    type: typeof AUTH_ISFETCHING,
+    payload: boolean
+}
+
+export const authIsFetching = (isFetch: boolean): AuthIsFetchingType => {
+    return {
+        type: AUTH_ISFETCHING,
+        payload: isFetch
+    }
+}
+
+export type FollowingInProgressType = {
+    type: typeof FOLLOWING_IN_PROGRESS,
+    payload:
+        {
+            isFollow: boolean
+            userId: number
+        }
+}
+
+export const followingProgress = (isFollow: boolean, userId: number): FollowingInProgressType => {
+    return {
+        type: FOLLOWING_IN_PROGRESS,
+        payload: {
+            isFollow,
+            userId
+        }
+
+    }
+}
+
+
+
+export type SetUserStatusType = {
+    type: typeof SET_USER_STATUS,
+    payload: string | null
+
+}
+
+export const setUserStatus = (status: string | null): SetUserStatusType => {
+    return {
+        type: SET_USER_STATUS,
+        payload: status
+
+    }
+}
+
+
+
+//===========THUNKS=====================
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: any) => {
+    dispatch(toggleIsFetching(true))
+    usersApi.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setPagesCount(data.totalCount))
+    })
+}
+
+
+export const onPageChange = (page: number, pageSize: number) => (dispatch: any) => {
+    dispatch(toggleIsFetching(true))
+    dispatch(setCurrentPage(page))
+    usersApi.changePage(page, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+    })
+
+}
+export const unFollowUser = (userId: number) => (dispatch: any) => {
+    dispatch(followingProgress(true, userId))
+    usersApi.deleteFollow(userId).then(resultCode => {
+        if (resultCode === 0) {
+            dispatch(unFollow(userId))
+            dispatch(followingProgress(false, userId))
+        }
+    })
+}
+
+export const followUser = (userId: number) => (dispatch: any) => {
+    dispatch(followingProgress(true, userId))
+    usersApi.postFollow(userId).then(resultCode => {
+        if (resultCode === 0) {
+            dispatch(follow(userId))
+            dispatch(followingProgress(false, userId))
+        }
+    })
+}
+
+export const getUserProfile = (userId: string) => (dispatch: any) => {
+    usersApi.setUser(userId).then(data => {
+        dispatch(setUserProfile(data))
+    })
+}
+
+export const setAuth = () => (dispatch: any) => {
+    dispatch(authIsFetching(true))
+    authApi.me().then(data => {
+        dispatch(authIsFetching(false))
+        if (data.resultCode === 0) {
+            const { email, password, id} = data.data
+            dispatch(setUserData({ email, password, id, isAuth: true}))
+
+
+        }
+    })
+}
+
+export const getUserStatus = (userId: string ) => (dispatch: any) => {
+    profileApi.getProfileStatus(userId).then(data=>{
+            dispatch(setUserStatus(data.data))
+
+    })
+}
+
+export const updateUserStatus = (status: string) => (dispatch: any) => {
+    profileApi.updateProfileStatus(status).then(data=>{
+        if (data.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+        }
+    })
+}
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+    authApi.login(email, password, rememberMe).then(data=>{
+        if (data.data.resultCode === 0) {
+            dispatch(setAuth())
+        }
+    })
+}
+
+export const logout = () => (dispatch: any) => {
+    authApi.logout().then(data=>{
+        if (data.data.resultCode === 0) {
+            dispatch(setUserData({email: null, password: null, id: null, isAuth: false}))
+        }
+    })
+}
+

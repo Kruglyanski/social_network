@@ -1,9 +1,20 @@
 .header {
+    display:grid;
     grid-area: h;
     background-color: #294465;
+    grid-template-columns: 20% 80%;
 }
 
-.header img {
+.logoImg {
     width: 80px;
 
+}
+
+.loginBlock a{
+    color: white;
+
+}
+.loginBlock {
+    justify-self: end;
+padding-right: 15px;
 }
