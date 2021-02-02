@@ -88,7 +88,7 @@ export type UserPageType = {
     users: Array<UserType>
     currentPage: number
     pageSize: number
-    pagesCount: number
+    totalItemsCount: number
     isFetching: boolean
     followingInProgress: []
 
@@ -108,5 +108,7 @@ export type StateType = {
     dialogsPage: DialogsPageType,
     sidebar: SidebarType,
     usersPage: UserPageType,
-    auth: AuthType
+    auth: AuthType,
+    formError: {formErrorMessage: string},
+    app: {initialized: boolean}
 }

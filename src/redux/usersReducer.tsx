@@ -13,7 +13,7 @@ const initialState = {
     users: [] as Array<UserType>,
     currentPage: 1,
     pageSize: 5,
-    pagesCount: 20,
+    totalItemsCount: 20,
     isFetching: true,
     followingInProgress: [] as Array<number>
 }
@@ -45,7 +45,7 @@ export const usersReducer = (state = initialState, action: any): InitialStateTyp
         case USER_SET_USERS:
             return {...state, users: [...action.payload]}
         case USER_SET_PAGES_COUNT:
-            return {...state, pagesCount: action.payload}
+            return {...state, totalItemsCount: action.payload}
         case USER_SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload}
         case USER_ISFETCHING_TOGGLE:

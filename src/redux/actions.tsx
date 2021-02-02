@@ -1,14 +1,25 @@
 import {
     ADD_MESSAGE,
-    ADD_POST, AUTH_ISFETCHING, FOLLOWING_IN_PROGRESS, SET_USER_DATA, SET_USER_PROFILE, SET_USER_STATUS,
+    ADD_POST,
+    APP_INIT_SUCCESS,
+    AUTH_ISFETCHING,
+    FOLLOWING_IN_PROGRESS,
+    SET_USER_DATA,
+    SET_USER_PROFILE,
+    SET_USER_STATUS,
     UPDATE_NEW_MESSAGE_BODY,
     UPDATE_NEW_POST_TEXT,
-    USER_FOLLOW, USER_ISFETCHING_TOGGLE, USER_SET_CURRENT_PAGE, USER_SET_PAGES_COUNT, USER_SET_USERS,
+    USER_FOLLOW,
+    USER_ISFETCHING_TOGGLE,
+    USER_SET_CURRENT_PAGE,
+    USER_SET_PAGES_COUNT,
+    USER_SET_USERS,
     USER_UNFOLLOW
 } from './actionsTypes'
-import {AuthDataType, NewPostTextType, UserIdType, UserPageType, UserProfileType, UserType} from '../types'
+import {AuthDataType,  UserProfileType, UserType} from '../types'
 import {authApi, profileApi, usersApi} from '../api/api'
-import axios from 'axios'
+import {FORM_ERROR} from 'final-form'
+
 
 export type ActionType = UpdateNewPostTextActionCreatorActionType | AddPostActionCreatorActionType |
     AddMessageActionCreatorActionType | UpdateNewMessageBodyActionCreatorActionType | FollowActionActionType |
@@ -203,6 +214,20 @@ export const setUserStatus = (status: string | null): SetUserStatusType => {
     }
 }
 
+export type InitAppSuccessType = {
+    type: typeof APP_INIT_SUCCESS,
+    payload: boolean
+
+}
+
+export const initAppSuccess= (payload: boolean): InitAppSuccessType => {
+    return {
+        type: APP_INIT_SUCCESS,
+        payload
+
+    }
+}
+
 
 
 //===========THUNKS=====================
@@ -253,13 +278,11 @@ export const getUserProfile = (userId: string) => (dispatch: any) => {
 
 export const setAuth = () => (dispatch: any) => {
     dispatch(authIsFetching(true))
-    authApi.me().then(data => {
+    return authApi.me().then(data => {
         dispatch(authIsFetching(false))
         if (data.resultCode === 0) {
             const { email, password, id} = data.data
             dispatch(setUserData({ email, password, id, isAuth: true}))
-
-
         }
     })
 }
@@ -280,10 +303,13 @@ export const updateUserStatus = (status: string) => (dispatch: any) => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
+    dispatch ({type: FORM_ERROR, payload: ''})
     authApi.login(email, password, rememberMe).then(data=>{
+
         if (data.data.resultCode === 0) {
             dispatch(setAuth())
-        }
+
+        }else dispatch ({type: FORM_ERROR, payload: data.data.messages[0]})
     })
 }
 
@@ -295,3 +321,8 @@ export const logout = () => (dispatch: any) => {
     })
 }
 
+export const initApp =  (payload: boolean) => async (dispatch: any) => {
+    let promise = await dispatch(setAuth())
+        Promise.all([promise]).then(dispatch(initAppSuccess(payload)))
+
+}

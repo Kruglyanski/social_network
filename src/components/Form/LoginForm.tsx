@@ -7,19 +7,20 @@ import {
 } from '../../utils/validators/validators'
 import React from 'react'
 import {ValidatedField} from './ValidatedField'
+import cls from './LoginForm.module.css'
 
 
 type PropsType = {
     onSubmit: (formData: any) => void
+    formErrorMessage: string
 }
 
 
-export const LoginForm = (props: PropsType) => (
-    <Form
+export const LoginForm = (props: PropsType) => {
+    return <Form
         onSubmit={props.onSubmit}
         render={({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
-
                 <div>
                     <ValidatedField
                         fieldName={'email'}
@@ -46,9 +47,13 @@ export const LoginForm = (props: PropsType) => (
                     />
                     remember me
                 </div>
+                {props.formErrorMessage && <div className={cls.formErrorMessage}>{props.formErrorMessage}</div>}
 
                 <button type="submit">Submit</button>
             </form>
         )}
     />
-)
+
+}
+
+

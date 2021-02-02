@@ -24,13 +24,4 @@ justify-self: end;
 
 }
 
-.pagination {
-    height: 50px;
-}
-.pagination span {
-    cursor: pointer;
-}
-.current {
-    font-weight: bold;
 
-}

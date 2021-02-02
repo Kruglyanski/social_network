@@ -8,7 +8,7 @@ import {Preloader} from '../common/Preloader/Preloader'
 type PropsType = {
     users: Array<UserType>
     currentPage: number
-    pagesCount: number
+    totalItemsCount: number
     pageSize: number
     isFetching: boolean
     followingInProgress: []
@@ -33,7 +33,7 @@ export class UsersAPIComponent extends React.Component<PropsType> {
                 :
                 <Users users={this.props.users}
                        currentPage={this.props.currentPage}
-                       pagesCount={this.props.pagesCount}
+                       totalItemsCount={this.props.totalItemsCount}
                        pageSize={this.props.pageSize}
                        onPageChange={this.props.onPageChange}
                        followingInProgress={this.props.followingInProgress}

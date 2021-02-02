@@ -8,11 +8,13 @@ import {Redirect} from 'react-router-dom'
 type PropsType = {
     login: (arg0: any, arg1: any, arg2: any) => void
     isAuth: boolean
+    formErrorMessage: string
+
 }
 
 const Login: React.FC<PropsType> = (props) => {
     const onSubmit = (formData: any) => {
-        console.log('formData', formData)
+
         props.login(formData.email, formData.password, formData.rememberMe)
     }
     if (props.isAuth) {
@@ -20,7 +22,7 @@ const Login: React.FC<PropsType> = (props) => {
     }
     return (
         <div>
-            <LoginForm onSubmit={onSubmit}/>
+            <LoginForm onSubmit={onSubmit} formErrorMessage={props.formErrorMessage}/>
         </div>
     )
 }
@@ -29,7 +31,8 @@ const mapStateToProps = (state: StateType) => {
 
     return {
 
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        formErrorMessage: state.formError.formErrorMessage
 
     }
 }

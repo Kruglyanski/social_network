@@ -5,6 +5,8 @@ import {sidebarReducer} from './sidebarReducer'
 import {usersReducer} from './usersReducer'
 import {authReducer} from './authReducer'
 import thunkMiddleware from 'redux-thunk'
+import {formErrorReducer} from './formErrorReducer'
+import {appReducer} from './appReducer'
 
 
 let rootReducer = combineReducers({
@@ -13,7 +15,8 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-
+    formError: formErrorReducer,
+    app: appReducer
 
 })
 

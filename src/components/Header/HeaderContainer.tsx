@@ -18,7 +18,7 @@ type PropsType = {
 
 export class HeaderContainer extends React.Component<PropsType> {
     componentDidMount(): void {
-        this.props.setAuth()
+
 
     }
 

@@ -2,13 +2,14 @@ import React from 'react'
 import cls from './Users.module.css'
 import {UserType} from '../../types'
 import {NavLink} from 'react-router-dom'
+import {Paginator} from '../Paginator/Paginator'
 
 
 
 type PropsType = {
     users: Array<UserType>
     currentPage: number
-    pagesCount: number
+    totalItemsCount: number
     pageSize: number
     onPageChange: (page: number, pageSize: number) => void
     followingInProgress: []
@@ -18,21 +19,17 @@ type PropsType = {
 
 const userPhoto: string = 'https://yt3.ggpht.com/a/AATXAJwUZo0h0jnPkbjgvyz8sz885KhnbHb6KnIwT4n_=s900-c-k-c0xffffffff-no-rj-mo'
 export const Users: React.FC<PropsType> = (props) => {
-    let pagesCount = Math.ceil(props.pagesCount / props.pageSize)
 
-    const pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
 
     return (
         <div className={cls.users}>
-            <div className={cls.pagination}>
-                {pages.map(page => <span onClick={() => props.onPageChange(page, props.pageSize)}
-                                         className={page === props.currentPage ? cls.current : ''}>{page}</span>)}
+            <Paginator onPageChange ={props.onPageChange} pageSize ={props.pageSize} totalItemsCount={props.totalItemsCount}  currentPage ={props.currentPage}/>
+            {/*<div className={cls.pagination}>*/}
+            {/*    {pages.map(page => <span onClick={() => props.onPageChange(page, props.pageSize)}*/}
+            {/*                             className={page === props.currentPage ? cls.current : ''}>{page}</span>)}*/}
 
 
-            </div>
+            {/*</div>*/}
             <h2>Users</h2>
             {props.users.map(user => {
                 return (

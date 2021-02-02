@@ -3,15 +3,15 @@ import cls from './Profile.module.css'
 import {MyPostsContainer} from './MyPosts/MyPostsContainer'
 import {NewPostTextType, PostType, UserProfileType} from '../../types'
 import {Preloader} from '../common/Preloader/Preloader'
-import {ProfileStatus} from './ProfileStatus'
+import {Status} from './Status'
 
 
 type PropsType = {
     posts: Array<PostType>
     newPostText: NewPostTextType
     profile: UserProfileType | null
-    status?: string
-    updateStatus?: (status: string) => void
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const Profile: React.FC<PropsType> = (props: PropsType) => {
@@ -27,7 +27,8 @@ export const Profile: React.FC<PropsType> = (props: PropsType) => {
             <div className={cls.contentHeader}>
                 <img alt='img' src='http://www.longrunexploration.com/upload/main_banner/2/05/banner.jpg'/>
             </div>
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <Status status={props.status} updateStatus={props.updateStatus}/>
+
             <div className={cls.avaWrapper}>
                 <div className={cls.avatar}>
                     <img alt='ava'
