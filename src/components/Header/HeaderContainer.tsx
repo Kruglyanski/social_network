@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { StateType} from '../../types'
-import {logout, setAuth} from '../../redux/actions'
+import {logout} from '../../redux/actions'
 import {Header} from './Header'
 
 
@@ -10,7 +10,7 @@ type PropsType = {
     password: string | null
     email: string | null
     isFetching: boolean
-    setAuth: () => void
+
     isAuth: boolean
     logout: () => void
 }
@@ -41,4 +41,4 @@ const mapStateToProps = (state: StateType) => {
     }
 }
 
-export default connect(mapStateToProps, {setAuth, logout})(HeaderContainer)
+export default connect(mapStateToProps, { logout})(HeaderContainer)

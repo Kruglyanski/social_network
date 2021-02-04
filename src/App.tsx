@@ -6,25 +6,38 @@ import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
 import {DialogsContainer} from './components/Dialogs/DialogsContainer'
 import {SidebarContainer} from './components/Sidebar/SidebarContainer'
-import {UsersContainer} from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
 import MyProfileContainer from './components/Profile/MyProfileContainer'
 import {connect} from 'react-redux'
-import {initApp} from './redux/actions'
+import {authIsFetching} from './redux/authReducer'
+import {appInitSuccess} from './redux/appReducer'
 import {StateType} from './types'
 import {compose} from 'redux'
 import {Preloader} from './components/common/Preloader/Preloader'
+import {Users} from './components/Users/Users'
+import {setAuth} from './redux/authReducer'
+
 
 type PropsType = {
     initApp: (arg: boolean) => void
     initialized: boolean
+    appInitSuccess: any
+    authIsFetching: any
+    setAuth: any
+
 }
 
 class App extends React.Component<PropsType> {
-    componentDidMount(): void {
-        this.props.initApp(true)
+    componentDidMount = async () => {
+        this.props.authIsFetching(true)
+        await this.props.setAuth()
+        this.props.authIsFetching(false)
+        this.props.appInitSuccess(true)
+
+
+
     }
 
     render() {
@@ -47,7 +60,7 @@ class App extends React.Component<PropsType> {
                     <Route exact path="/dialogs" render={() => <DialogsContainer/>}/>
 
                     <Route path="/news" render={() => <News/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
+                    <Route path="/users" render={() => <Users/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
                     <Route path="/login" render={() => <Login/>}/>
@@ -67,5 +80,5 @@ const mapStateToProps = (state: StateType) => {
 }
 export const ConnectedApp = compose(
     withRouter,
-    connect(mapStateToProps, {initApp})
+    connect(mapStateToProps, {setAuth, authIsFetching, appInitSuccess})
 )(App)

@@ -19,6 +19,7 @@ import {
 import {AuthDataType,  UserProfileType, UserType} from '../types'
 import {authApi, profileApi, usersApi} from '../api/api'
 import {FORM_ERROR} from 'final-form'
+import { authIsFetching } from './authReducer'
 
 
 export type ActionType = UpdateNewPostTextActionCreatorActionType | AddPostActionCreatorActionType |
@@ -159,24 +160,24 @@ export type setUserDataType = {
     payload: AuthDataType
 }
 
-export const setUserData = ({ email, password, id, isAuth}: AuthDataType): setUserDataType => {
-    return {
-        type: SET_USER_DATA,
-        payload: { email, password, id, isAuth}
-    }
-}
+// export const setUserData = ({ email, password, id, isAuth}: AuthDataType): setUserDataType => {
+//     return {
+//         type: SET_USER_DATA,
+//         payload: { email, password, id, isAuth}
+//     }
+// }
 
 export type AuthIsFetchingType = {
     type: typeof AUTH_ISFETCHING,
     payload: boolean
 }
 
-export const authIsFetching = (isFetch: boolean): AuthIsFetchingType => {
-    return {
-        type: AUTH_ISFETCHING,
-        payload: isFetch
-    }
-}
+// export const authIsFetching = (isFetch: boolean): AuthIsFetchingType => {
+//     return {
+//         type: AUTH_ISFETCHING,
+//         payload: isFetch
+//     }
+// }
 
 export type FollowingInProgressType = {
     type: typeof FOLLOWING_IN_PROGRESS,
@@ -276,16 +277,16 @@ export const getUserProfile = (userId: string) => (dispatch: any) => {
     })
 }
 
-export const setAuth = () => (dispatch: any) => {
-    dispatch(authIsFetching(true))
-    return authApi.me().then(data => {
-        dispatch(authIsFetching(false))
-        if (data.resultCode === 0) {
-            const { email, password, id} = data.data
-            dispatch(setUserData({ email, password, id, isAuth: true}))
-        }
-    })
-}
+// export const setAuth = () => (dispatch: any) => {
+//     dispatch(authIsFetching(true))
+//     return authApi.me().then(data => {
+//         dispatch(authIsFetching(false))
+//         if (data.resultCode === 0) {
+//             const { email, password, id} = data.data
+//             dispatch(setUserData({ email, password, id, isAuth: true}))
+//         }
+//     })
+// }
 
 export const getUserStatus = (userId: string ) => (dispatch: any) => {
     profileApi.getProfileStatus(userId).then(data=>{
@@ -307,7 +308,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
     authApi.login(email, password, rememberMe).then(data=>{
 
         if (data.data.resultCode === 0) {
-            dispatch(setAuth())
+            // dispatch(setAuth())
 
         }else dispatch ({type: FORM_ERROR, payload: data.data.messages[0]})
     })
@@ -316,13 +317,13 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
 export const logout = () => (dispatch: any) => {
     authApi.logout().then(data=>{
         if (data.data.resultCode === 0) {
-            dispatch(setUserData({email: null, password: null, id: null, isAuth: false}))
+            // dispatch(setUserData({email: null, password: null, id: null, isAuth: false}))
         }
     })
 }
 
-export const initApp =  (payload: boolean) => async (dispatch: any) => {
-    let promise = await dispatch(setAuth())
-        Promise.all([promise]).then(dispatch(initAppSuccess(payload)))
-
-}
+// export const initApp =  (payload: boolean) => async (dispatch: any) => {
+//     let promise = await dispatch(setAuth())
+//         Promise.all([promise]).then(dispatch(initAppSuccess(payload)))
+//
+// }

@@ -4,7 +4,7 @@ import cls from './Paginator.module.css'
 type PropsType = {
     currentPage: number
     pageSize: number
-    onPageChange: (page: number, pageSize: number) => void
+    onPageChangeHandler: (page: number, pageSize: number) => void
     totalItemsCount: number
     portionSize?: number
 }
@@ -28,7 +28,7 @@ export const Paginator: React.FC<PropsType> = ({portionSize = 10, ...props}) => 
             {portionNumber > 1 && <button onClick={() => {setPortionNumber(portionNumber - 1)}}>PREV</button>}
             {pages
                 .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
-                .map((page) => <span onClick={() => props.onPageChange(page, props.pageSize)}
+                .map((page) => <span onClick={() => props.onPageChangeHandler(page, props.pageSize)}
                                                className={page === props.currentPage ? cls.current : ''}>{page}</span>)}
             {portionNumber < portionCount && <button onClick={() => {setPortionNumber(portionNumber + 1)}}>NEXT</button>}
         </div>
